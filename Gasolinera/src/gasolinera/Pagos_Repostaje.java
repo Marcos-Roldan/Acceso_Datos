@@ -1,7 +1,7 @@
 package gasolinera;
 import java.time.LocalDate;
 
-public class Pagos_Repostajes {
+public class Pagos_Repostaje {
     private int id; //Entero positivo
     private int id_cliente; //Debe tener cliente asignado
     private LocalDate fecha; //Fecha real
@@ -9,7 +9,7 @@ public class Pagos_Repostajes {
     private double litros; //Mayor que cero con maximo de dos decimales
     private String combustible; //Obligatorio
 
-    public Pagos_Repostajes(int id, int id_cliente, LocalDate fecha, double importe, double litros, String combustible) {
+    public Pagos_Repostaje(int id, int id_cliente, LocalDate fecha, double importe, double litros, String combustible) {
         this.id = id;
         this.id_cliente = id_cliente;
         this.fecha = fecha;

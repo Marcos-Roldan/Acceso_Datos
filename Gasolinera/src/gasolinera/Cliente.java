@@ -1,4 +1,4 @@
-package Gasolinera;
+package gasolinera;
 
 public class Cliente {
     private int id; //Entero mayor que cero
