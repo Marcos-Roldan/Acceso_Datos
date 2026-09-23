@@ -55,12 +55,14 @@ public class Almacenamiento_EnCSV implements Almacenamiento {
 
         try(BufferedWriter out = Files.newBufferedWriter(rutaClientes, StandardCharsets.UTF_8,
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND)) { //CREATE para crear el archivo en caso de no existir, APPEND pone el texto al final
+
             String linea = cliente.getId() + "," + cliente.getNombre() + "," + cliente.getTelefono() + "," + cliente.getMatricula(); //Convierto los atributos del objeto cliente en una solo linea separado por ,
 
             out.write(linea); //Escribimos la linea en el fichero
             out.newLine(); //Salto de linea para que el siguiente registro se ponga abajo
 
             return true; //Esta correcto
+
         } catch (IOException ex) {
             System.out.println("Error al escribir el archivo");
             return false;
@@ -99,6 +101,25 @@ public class Almacenamiento_EnCSV implements Almacenamiento {
 
     @Override
     public boolean escribirPago(Pagos_Repostaje pago) {
-        return false;
+        try {
+            Files.createDirectories(rutaPagos.getParent());
+        } catch (IOException ex) {
+            System.out.println("Error al crear el archivo" + ex);
+        }
+
+        try(BufferedWriter out = Files.newBufferedWriter(rutaPagos, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+
+            String linea = pago.getId() + "," + pago.getId_cliente() + "," + pago.getFecha() + "," + pago.getImporte() + "," + pago.getLitros() + "," + pago.getCombustible();
+
+            out.write(linea);
+            out.newLine();
+
+            return true;
+
+        } catch (IOException ex) {
+            System.out.println("Error al escribir el archivo");
+            return false;
+        }
     }
 }
