@@ -13,12 +13,17 @@ import java.util.List;
 
 public class Almacenamiento_EnCSV implements Almacenamiento {
 
-    Path rutaClientes = Path.of("Cliente.csv");
-    Path rutaPagos = Path.of("Pagos_Repostaje.csv");
+    private Path rutaClientes = Path.of("Cliente.csv");
+    private Path rutaPagos = Path.of("Pagos_Repostaje.csv");
 
     @Override
     public List<Cliente> leerClientes() {
         List<Cliente> lista = new ArrayList<>();
+
+        //Si el archivo no existe devolvemos la lista vacia
+        if(!Files.exists(rutaClientes)) {
+            return lista;
+        }
 
         //ABRIMOS EL ARCHIVO EN MODO LECTURA
         try(BufferedReader in = Files.newBufferedReader(rutaClientes)) {
@@ -27,10 +32,10 @@ public class Almacenamiento_EnCSV implements Almacenamiento {
             while(linea != null) { //Mientras siga habiendo lineas en el archivo
                 if(!linea.isBlank()) { //Comprobamos que la linea no esta vacia ni contiene espacios
                     String[] datos = linea.split(","); //Cada vez que hay , hay salto de linea
-                    int id = Integer.parseInt(datos[0]); //String a Entero
-                    String nombre = datos[1];
-                    String telefono = datos[2];
-                    String matricula = datos[3];
+                    int id = Integer.parseInt(datos[0].trim()); //String a Entero
+                    String nombre = datos[1].trim();
+                    String telefono = datos[2].trim();
+                    String matricula = datos[3].trim();
 
                     lista.add(new Cliente(id, nombre, telefono, matricula));
                 }
@@ -72,6 +77,10 @@ public class Almacenamiento_EnCSV implements Almacenamiento {
     @Override
     public List<Pagos_Repostaje> leerPago() {
         List<Pagos_Repostaje> lista = new ArrayList<>();
+
+        if(!Files.exists(rutaPagos)) {
+            return lista;
+        }
 
         try(BufferedReader in = Files.newBufferedReader(rutaPagos)) {
 

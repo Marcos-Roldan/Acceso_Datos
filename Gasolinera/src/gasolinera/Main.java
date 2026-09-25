@@ -9,6 +9,8 @@ public class Main {
         Cliente_DAO cliente_metodos = new Cliente_DAO();
         Pagos_Repostajes_DAO pagos_repostajes_metodos = new Pagos_Repostajes_DAO();
 
+        Almacenamiento almacenamineto = new Almacenamiento_EnCSV();
+
         do {
             Menu();
             opcion = sc.nextInt();
@@ -24,7 +26,10 @@ public class Main {
                     cliente_metodos.BuscarCliente();
                     break;
                 case 4:
-                    pagos_repostajes_metodos.ProcesarPagoRepostaje();
+                    pagos_repostajes_metodos.ProcesarPagoRepostaje(sc);
+                    break;
+                case 5:
+                    pagos_repostajes_metodos.ConsultarPagoRepostaje();
                     break;
                 case 0:
                     System.out.println("Has salido del programa");
