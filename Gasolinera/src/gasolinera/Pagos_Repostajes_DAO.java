@@ -1,5 +1,6 @@
 package gasolinera;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,7 +50,14 @@ public class Pagos_Repostajes_DAO {
             //Llevar al menu sin registrar el pago
         }
 
+        System.out.println("Introduce la fecha: ");
+        LocalDate fecha = LocalDate.parse(sc.next());
 
+        while(!scanner.hasNext()) {
+            System.out.println("Error: La fecha introducida no corresonde a un campo valido");
+            System.out.println("Introduce la fecha: ");
+            fecha = LocalDate.parse(sc.next());
+        }
     }
 
     public void ConsultarPagoRepostaje() {
